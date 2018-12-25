@@ -2,141 +2,78 @@
 
 const {createApolloFetch} = require('apollo-fetch');
 
-const uri = 'http://example.com/graphql';
+const uri = 'http://localhost:4000/graphql';
+// const uri = 'http://no-ssl-route-user1.apps.waterford-a1bc.openshiftworkshop.com/graphql';
 const apolloFetch = createApolloFetch({uri});
 
 apolloFetch.use(({request, options}, next) => {
     if (!options.headers) {
         options.headers = {};  // Create the headers object if needed.
     }
-    options.headers['authorization'] = 'abcdefgh123-abcdefgh123';
+    // options.headers['authorization'] = '6bmQFbdVj5y2ApFDivcrGYi6okcXLOGOza7me4hEajw';
+    options.headers['Authorization'] = 'Bearer eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICI5UnFISG1HeE9KTkZ2WFk0dWM4THFMUkljNVFCZjA3dFJYcDNrY1JVcHhJIn0.eyJqdGkiOiI1ODExZjgwZS1jYzk4LTRjZGEtOWZjNy0xMmM2OTgyYTJlNjIiLCJleHAiOjE1NDU3NzgzODAsIm5iZiI6MCwiaWF0IjoxNTQ1NzQyMzgwLCJpc3MiOiJodHRwOi8vbG9jYWxob3N0OjgwODAvYXV0aC9yZWFsbXMvdm95YWdlci10ZXN0aW5nIiwiYXVkIjoidm95YWdlci10ZXN0aW5nIiwic3ViIjoiNjdkNGFiNjQtNDgxNS00MzExLWE1OWUtMzAyMDljYjhhYzJjIiwidHlwIjoiQmVhcmVyIiwiYXpwIjoidm95YWdlci10ZXN0aW5nIiwiYXV0aF90aW1lIjoxNTQ1NzQyMzgwLCJzZXNzaW9uX3N0YXRlIjoiYjY4NGEzNDktYmRmNy00MTBjLTkyZWYtOWM4ZjZiZTZkOGI2IiwiYWNyIjoiMSIsImFsbG93ZWQtb3JpZ2lucyI6WyIqIl0sInJlYWxtX2FjY2VzcyI6eyJyb2xlcyI6WyJhZG1pbiIsInVtYV9hdXRob3JpemF0aW9uIl19LCJyZXNvdXJjZV9hY2Nlc3MiOnsidm95YWdlci10ZXN0aW5nIjp7InJvbGVzIjpbImFkbWluIl19LCJhY2NvdW50Ijp7InJvbGVzIjpbIm1hbmFnZS1hY2NvdW50IiwibWFuYWdlLWFjY291bnQtbGlua3MiLCJ2aWV3LXByb2ZpbGUiXX19LCJuYW1lIjoiQWxpIE9rIiwicHJlZmVycmVkX3VzZXJuYW1lIjoiZGV2ZWxvcGVyIiwiZ2l2ZW5fbmFtZSI6IkFsaSIsImZhbWlseV9uYW1lIjoiT2siLCJlbWFpbCI6ImFsaW9rQGFsaW9rLmNvbS50ciJ9.QZ8uiv1Z1gqiDjQAS6gwBsQ-O_YWr-qSI7EDVAhz3irndh5PCSbIfjTAF2EAqJxAZbYxhV3Iih932_5eQkowhKF61Tx5aSA5wY9ELeG2bJ5mU8uTzdnyxWdlPvdbJDpVUeCAxcJLgW8JnkykAQHEUjbVoT87YxxfgFTGmXZwEY4W_Qm8DiE8uqQFLhqdRQunQBLeKxjjPPVBOY7OZk7rlsyxjLS7UVaik4CGmGBYahmbrSivBJujn4jctKdKJ_k7D1UEdZgXeXfe92lDA7GKEheMTcXGDBaXfzKAravmn09hfCqlf6AwUx8_5RyfbN_D5jzEgwFSEY2WvLfClqbjyg';
 
     next();
 });
 
-function graphQlErrorOnPurpose() {
+function fails() {
     const query = `
-        mutation createMeme($owner: ID!, $photourl: String!) {
-          createMeme(owner: $owner, photourl: $photourl) {
-              id
-              photourl
-              likes
-              owner {
-                id
-                displayname
-                email
-                pictureurl
-              }
-          }
+        query fails {
+          fails
         }
     `;
 
-    const ownerId = "owner" + Math.ceil(Math.random() * 100 + 1);
-
-    // no photourl
-    return execute(query, {owner: ownerId}, "createMeme");
+    return execute(query, {}, "fails");
 }
 
-function createMemeFail() {
+function getUser() {
     const query = `
-        mutation createMemeFail($owner: ID!, $photourl: String!) {
-          createMemeFail(owner: $owner, photourl: $photourl) {
-              id
-              photourl
-              likes
-              owner {
-                id
-                displayname
-                email
-                pictureurl
-              }
-          }
-        }
-    `;
-
-    const ownerId = "owner" + Math.ceil(Math.random() * 100 + 1);
-    const photoUrl = "photo" + Math.ceil(Math.random() * 1000 + 1);
-
-    return execute(query, {owner: ownerId, photourl: photoUrl}, "createMemeFail");
-}
-
-function fetchMemes() {
-    const query = `
-        query allMemes {
-          allMemes {
+        query getUser($id: Int!) {
+          getUser(id:$id){
             id
-            photourl
-            likes
-            owner {
+            name
+            memes {
               id
-              displayname
-              email
-              pictureurl
+              url
             }
           }
         }
     `;
 
-    return execute(query, {}, "allMemes");
-}
+    const id = Math.ceil(Math.random() * 100 + 1);
 
-function profile() {
-    const query = `
-        query profile($email: String!) {
-          profile(email:$email){
-            id
-            email
-            displayname
-            pictureurl
-          }
-        }
-    `;
-
-    const email = "email" + Math.ceil(Math.random() * 100 + 1);
-
-    return execute(query, {email: email}, "profile");
+    return execute(query, {id: id}, "getUser");
 }
 
 function createMeme() {
     const query = `
-        mutation createMeme($owner: ID!, $photourl: String!) {
-          createMeme(owner: $owner, photourl: $photourl) {
+        mutation createMeme($userId: Int!, $url: String!) {
+          createMeme(userId: $userId, url: $url) {
               id
-              photourl
-              likes
-              owner {
-                id
-                displayname
-                email
-                pictureurl
-              }
+              url
           }
         }
     `;
 
-    const ownerId = "owner" + Math.ceil(Math.random() * 100 + 1);
-    const photoUrl = "photo" + Math.ceil(Math.random() * 1000 + 1);
+    const userId = Math.ceil(Math.random() * 100 + 1);
+    const url = "photo" + Math.ceil(Math.random() * 1000 + 1);
 
-    return execute(query, {owner: ownerId, photourl: photoUrl}, "createMeme");
+    return execute(query, {userId: userId, url: url}, "createMeme");
 }
 
-function createProfile() {
+function createUser() {
     const query = `
-        mutation createProfile($email: String!, $displayname: String!, $pictureurl: String!) {
-          createProfile(email: $email, displayname: $displayname, pictureurl: $pictureurl) {
+        mutation createUser($name: String!) {
+          createUser(name: $name) {
             id
-            email
-            displayname
-            pictureurl
+            name
           }
         }
     `;
 
-    const email = "email" + Math.ceil(Math.random() * 100 + 1);
-    const displayname = "displayname" + Math.ceil(Math.random() * 100 + 1);
-    const pictureurl = "pictureurl" + Math.ceil(Math.random() * 1000 + 1);
+    const name = "name" + Math.ceil(Math.random() * 100 + 1);
 
-    return execute(query, {email: email, displayname: displayname, pictureurl: pictureurl}, "createProfile");
+    return execute(query, {name: name}, "createUser");
 }
 
 function execute(query, variables, operationName) {
@@ -160,16 +97,19 @@ function execute(query, variables, operationName) {
 
 function pickRandomOperation() {
     const operations = [
-        fetchMemes, fetchMemes,
         createMeme, createMeme,
-        createProfile,
-        profile, profile,
-        graphQlErrorOnPurpose,
-        createMemeFail
+        createUser,
+        getUser, getUser,
+        fails
     ];
+    // if(1===1){
+    //     // return fails;
+    //     // return createUser;
+    //     // return getUser;
+    //     // return createMeme;
+    // }
     const randomIndex = Math.floor(Math.random() * operations.length);
     return operations[randomIndex];
-    // return createMemeFail;
 }
 
 

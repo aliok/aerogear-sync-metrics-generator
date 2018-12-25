@@ -1,0 +1,22 @@
+[
+  {
+    "_id": "Sync-Audit-logs",
+    "_type": "search",
+    "_source": {
+      "title": "Sync - Audit logs - $OPENSHIFT_NAMESPACE$",
+      "description": "",
+      "hits": 0,
+      "columns": [
+        "_source"
+      ],
+      "sort": [
+        "@timestamp",
+        "desc"
+      ],
+      "version": 1,
+      "kibanaSavedObjectMeta": {
+        "searchSourceJSON": "{\"index\":\"project.$OPENSHIFT_NAMESPACE$.*\",\"query\":{\"query_string\":{\"analyze_wildcard\":true,\"query\":\"*\"}},\"filter\":[{\"meta\":{\"negate\":false,\"index\":\"project.$OPENSHIFT_NAMESPACE$.*\",\"key\":\"tag\",\"value\":\"AUDIT\",\"disabled\":false,\"alias\":null},\"query\":{\"match\":{\"tag\":{\"query\":\"AUDIT\",\"type\":\"phrase\"}}},\"$state\":{\"store\":\"appState\"}},{\"meta\":{\"negate\":false,\"index\":\"project.$OPENSHIFT_NAMESPACE$.*\",\"key\":\"kubernetes.labels.service\",\"value\":\"data-sync-server\",\"disabled\":false,\"alias\":null},\"query\":{\"match\":{\"kubernetes.labels.service\":{\"query\":\"data-sync-server\",\"type\":\"phrase\"}}},\"$state\":{\"store\":\"appState\"}}],\"highlight\":{\"pre_tags\":[\"@kibana-highlighted-field@\"],\"post_tags\":[\"@/kibana-highlighted-field@\"],\"fields\":{\"*\":{}},\"require_field_match\":false,\"fragment_size\":2147483647}}"
+      }
+    }
+  }
+]
