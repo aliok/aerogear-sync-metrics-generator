@@ -132,15 +132,15 @@ function createRandomClientInfo(){
             "timestamp": new Date().getTime(),
             "data": {
                 "app": {
-                    "appId": "io.ionic.starter" + Math.ceil(Math.random() * 5 + 1),
-                    "appVersion": "0.0." + Math.ceil(Math.random() * 5 + 1),
-                    "sdkVersion": "2.0." + Math.ceil(Math.random() * 3 + 1),
-                    "framework": ["cordova"]
+                    "appId": "io.ionic.starter" + Math.floor(Math.random() * 5 + 1),
+                    "appVersion": "0.0." + Math.floor(Math.random() * 5 + 1),
+                    "sdkVersion": "2.0." + Math.floor(Math.random() * 3 + 1),
+                    "framework": "cordova"
                 },
                 "device": {
                     "platform": "android",
-                    "platformVersion": ["7", "8"][Math.ceil(Math.random())],
-                    "device": ["HTC One", "LG Nexus 5x"][Math.ceil(Math.random())]
+                    "platformVersion": ["7", "8"][Math.floor(Math.random()*2)],
+                    "device": ["HTC One", "LG Nexus 5x"][Math.floor(Math.random()*2)]
                 }
             }
         }
@@ -150,15 +150,15 @@ function createRandomClientInfo(){
             "timestamp": new Date().getTime(),
             "data": {
                 "app": {
-                    "appId": "io.ionic.starter" + Math.ceil(Math.random() * 5 + 1),
-                    "appVersion": "0.0." + Math.ceil(Math.random() * 5 + 1),
-                    "sdkVersion": "2.0." + Math.ceil(Math.random() * 3 + 1),
-                    "framework": ["cordova"]
+                    "appId": "io.ionic.starter" + Math.floor(Math.random() * 5 + 1),
+                    "appVersion": "0.0." + Math.floor(Math.random() * 5 + 1),
+                    "sdkVersion": "2.0." + Math.floor(Math.random() * 3 + 1),
+                    "framework": "cordova"
                 },
                 "device": {
                     "platform": "ios",
-                    "platformVersion": ["4", "5"][Math.ceil(Math.random())],
-                    "device": ["iPhone 3G", "iPhone 4S"][Math.ceil(Math.random())]
+                    "platformVersion": ["4", "5"][Math.floor(Math.random())],
+                    "device": ["iPhone 3G", "iPhone 4S"][Math.floor(Math.random()*2)]
                 }
             }
         }
