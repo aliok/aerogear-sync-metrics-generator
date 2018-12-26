@@ -1,0 +1,62 @@
+[
+  {
+    "_id": "sync_root_level_audit_logs_<PROJECT_UUID>",
+    "_type": "search",
+    "_source": {
+      "title": "AeroGear Sync - Root level audit logs - <PROJECT_NAME>",
+      "description": "",
+      "hits": 0,
+      "columns": [
+        "_source"
+      ],
+      "sort": [
+        "@timestamp",
+        "desc"
+      ],
+      "version": 1,
+      "kibanaSavedObjectMeta": {
+        "searchSourceJSON": "{\"index\":\"project.<PROJECT_NAME>.<PROJECT_UUID>.*\",\"highlightAll\":true,\"version\":true,\"query\":{\"match_all\":{}},\"filter\":[{\"meta\":{\"negate\":false,\"index\":\"project.<PROJECT_NAME>.<PROJECT_UUID>.*\",\"type\":\"phrase\",\"key\":\"tag\",\"value\":\"AUDIT\",\"disabled\":false,\"alias\":null},\"query\":{\"match\":{\"tag\":{\"query\":\"AUDIT\",\"type\":\"phrase\"}}},\"$state\":{\"store\":\"appState\"}},{\"meta\":{\"index\":\"project.<PROJECT_NAME>.<PROJECT_UUID>.*\",\"type\":\"phrases\",\"key\":\"audit.parentTypeName\",\"value\":\"Query, Mutation, Subscription\",\"params\":[\"Query\",\"Mutation\",\"Subscription\"],\"negate\":false,\"disabled\":false,\"alias\":null},\"query\":{\"bool\":{\"should\":[{\"match_phrase\":{\"audit.parentTypeName\":\"Query\"}},{\"match_phrase\":{\"audit.parentTypeName\":\"Mutation\"}},{\"match_phrase\":{\"audit.parentTypeName\":\"Subscription\"}}],\"minimum_should_match\":1}},\"$state\":{\"store\":\"appState\"}}]}"
+      }
+    }
+  },
+  {
+    "_id": "sync_failures_<PROJECT_UUID>",
+    "_type": "search",
+    "_source": {
+      "title": "AeroGear Sync - Failures - <PROJECT_NAME>",
+      "description": "",
+      "hits": 0,
+      "columns": [
+        "_source"
+      ],
+      "sort": [
+        "@timestamp",
+        "desc"
+      ],
+      "version": 1,
+      "kibanaSavedObjectMeta": {
+        "searchSourceJSON": "{\"index\":\"project.<PROJECT_NAME>.<PROJECT_UUID>.*\",\"highlightAll\":true,\"version\":true,\"query\":{\"match_all\":{}},\"filter\":[{\"meta\":{\"negate\":false,\"index\":\"project.<PROJECT_NAME>.<PROJECT_UUID>.*\",\"type\":\"phrase\",\"key\":\"tag\",\"value\":\"AUDIT\",\"disabled\":false,\"alias\":null},\"query\":{\"match\":{\"tag\":{\"query\":\"AUDIT\",\"type\":\"phrase\"}}},\"$state\":{\"store\":\"appState\"}},{\"meta\":{\"index\":\"project.<PROJECT_NAME>.<PROJECT_UUID>.*\",\"negate\":false,\"disabled\":false,\"alias\":null,\"type\":\"phrase\",\"key\":\"audit.success\",\"value\":\"false\"},\"query\":{\"match\":{\"audit.success\":{\"query\":false,\"type\":\"phrase\"}}},\"$state\":{\"store\":\"appState\"}}]}"
+      }
+    }
+  },
+  {
+    "_id": "sync_audit_logs_<PROJECT_UUID>",
+    "_type": "search",
+    "_source": {
+      "title": "AeroGear Sync - Audit logs - <PROJECT_NAME>",
+      "description": "",
+      "hits": 0,
+      "columns": [
+        "_source"
+      ],
+      "sort": [
+        "@timestamp",
+        "desc"
+      ],
+      "version": 1,
+      "kibanaSavedObjectMeta": {
+        "searchSourceJSON": "{\"index\":\"project.<PROJECT_NAME>.<PROJECT_UUID>.*\",\"highlightAll\":true,\"version\":true,\"query\":{\"match_all\":{}},\"filter\":[{\"meta\":{\"negate\":false,\"index\":\"project.<PROJECT_NAME>.<PROJECT_UUID>.*\",\"type\":\"phrase\",\"key\":\"tag\",\"value\":\"AUDIT\",\"disabled\":false,\"alias\":null},\"query\":{\"match\":{\"tag\":{\"query\":\"AUDIT\",\"type\":\"phrase\"}}},\"$state\":{\"store\":\"appState\"}}]}"
+      }
+    }
+  }
+]
