@@ -20,3 +20,8 @@ sed \
     -e "s/<PROJECT_NAME>/${PROJECT_NAME}/g" \
     -e "s/<PROJECT_UUID>/${PROJECT_UUID}/g" \
  dashboardsTemplate.json > kibana/dashboards.json
+
+sed \
+    -e "s/<PROJECT_NAME>/${PROJECT_NAME}/g" \
+    -e "s/<PROJECT_UUID>/${PROJECT_UUID}/g" \
+ importTemplate.json > kibana/import.json
