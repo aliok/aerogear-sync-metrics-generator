@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
-PROJECT_NAME=ddd
-PROJECT_UUID=46e46752-08e6-11e9-a1cf-06f3e8a0c120
+PROJECT_NAME=aaa
+PROJECT_UUID=49f9a0b6-09b5-11e9-9597-069f7827c758
 
 rm -rf ./kibana || true
 mkdir kibana
