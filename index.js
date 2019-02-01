@@ -1,5 +1,8 @@
 'use strict'
 
+process.env["NODE_TLS_REJECT_UNAUTHORIZED"] = 0;
+
+
 const {createApolloFetch, constructDefaultOptions} = require('apollo-fetch');
 
 // const uri = 'http://localhost:4000/graphql';
@@ -35,6 +38,16 @@ function fails() {
     `;
 
     return execute(query, {}, "fails");
+}
+
+function createConflict() {
+    const query = `
+        mutation createConflict {
+          createConflict
+        }
+    `;
+
+    return execute(query, {}, "createConflict");
 }
 
 function getUser() {
@@ -111,7 +124,8 @@ function pickRandomOperation() {
         createMeme, createMeme,
         createUser,
         getUser, getUser,
-        fails
+        fails,
+        createConflict
     ];
     // if(1===1){
     //     // return fails;
